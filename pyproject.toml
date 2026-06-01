@@ -1,0 +1,12 @@
+[project]
+name = "comfyui-lora-browser"
+version = "1.0.0"
+description = "A ComfyUI custom node for browsing and loading LoRA files with folder tree navigation and multi-slot support."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.comfy]
+display_name = "LoRA Browser"
+category = "loaders"

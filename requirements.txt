@@ -1,0 +1,2 @@
+# ComfyUI LoRA Browser
+# 无额外依赖 — 使用 ComfyUI 内置库（folder_paths, comfy.sd, comfy.utils）
