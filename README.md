@@ -1,52 +1,60 @@
-# ComfyUI LoRA Browser
+# MLiang LoRA Loader
 
-一个 ComfyUI 自定义节点，提供文件夹树形浏览 + 多槽位 LoRA 加载功能，设计灵感来自 rgthree Power LoRA Loader。
+A ComfyUI custom node providing folder-tree browsing + multi-slot LoRA loading with preview images. UI design inspired by rgthree Power LoRA Loader.
 
-## 功能
+## Screenshots
 
-- **📂 文件夹树形浏览** — 在节点内按文件夹层级浏览 LoRA 文件，逐级展开直到选到目标
-- **🔍 实时搜索过滤** — 树面板顶部搜索框，输入关键字即时过滤
-- **⌨️ 键盘导航** — ↑↓ 箭头键移动高亮，Enter 确认选择，Escape 关闭
-- **🔗 多槽位串联** — 支持添加多个 LoRA，按顺序依次应用
-- **🔄 Toggle All** — 一键开关所有 LoRA
-- **🖱️ 右键菜单** — Show Info / Toggle / Move Up/Down / Remove
-- **🎨 原生风格** — 采用 ComfyUI 原生暗色配色，不自定义颜色
+| Node UI | Tree Browser | Preview | Workflow |
+|---------|-------------|---------|----------|
+| ![screenshot1](assets/screenshot1.png) | ![screenshot2](assets/screenshot2.png) | ![screenshot3](assets/screenshot3.png) | ![screenshot4](assets/screenshot4.png) |
 
-## 安装
+## Features
 
-### 方法一：ComfyUI Manager（推荐）
+- **Folder-tree browsing** — browse LoRA files by folder hierarchy, expand/collapse until you find your target
+- **Real-time search** — filter tree panel by keyword, auto-expand matching branches
+- **Keyboard navigation** — ↑↓ arrows to move highlight, Enter to select, Escape to close
+- **Multi-slot loading** — add multiple LoRAs, applied sequentially in order
+- **Toggle All** — one-click enable/disable all LoRAs
+- **Right-click menu** — Show Info / Toggle / Move Up/Down / Remove
+- **Hover preview** — mouse over a LoRA file to see preview image
+- **Native dark theme** — uses ComfyUI's native color scheme
 
-在 ComfyUI Manager 中搜索 "LoRA Browser" 安装。
+## Installation
 
-### 方法二：手动安装
+### Method 1: ComfyUI Manager (recommended)
+
+Search for "MLiang LoRA Loader" in ComfyUI Manager and install.
+
+### Method 2: Manual
 
 ```bash
 cd ComfyUI/custom_nodes/
-git clone https://github.com/<your-username>/comfyui-lora-browser.git
+git clone https://github.com/dingmuliang/comfyui-mliang-lora-loader.git
 ```
 
-重启 ComfyUI（不是刷新网页！）。
+**Restart ComfyUI** (not just refresh the web page).
 
-## 使用
+## Usage
 
-1. 在节点列表中搜索 **"LoRA Browser"**
-2. 连接 MODEL 和 CLIP 输入端
-3. 点击 **"📂 浏览"** 按钮打开文件夹树
-4. 逐级展开文件夹 → 点击选中 LoRA 文件
-5. 调节 Strength 值（点击数值输入或按 ▲▼ 微调）
-6. 点击 **"+ Add LoRA"** 添加更多槽位
-7. 右键点击任意 LoRA 行查看菜单
+1. Search for **"MLiang LoRA Loader"** in the node list
+2. Connect MODEL and CLIP inputs
+3. Click the **folder button** to open the tree panel
+4. Expand folders → click to select a LoRA file
+5. Adjust Strength with text input or ▲▼ arrows
+6. Click **"+ Add LoRA"** to add more slots
+7. **Right-click** any LoRA row for context menu
 
-## 项目结构
+## Project Structure
 
 ```
-comfyui-lora-browser/
-├── __init__.py          # Python 后端：LoRA 扫描 + 加载
+comfyui-mliang-lora-loader/
+├── __init__.py          # Python backend: LoRA scanning + loading
 ├── js/
-│   ├── tree_data.js     # 自动生成：文件夹树数据（ComfyUI 启动时更新）
-│   └── lora_browser.js  # 前端：自定义 DOM Widget UI
-├── examples/            # 示例工作流
-├── .github/             # GitHub Actions 工作流
+│   ├── tree_data.js     # Auto-generated: folder tree data (updated on ComfyUI start)
+│   └── lora_browser.js  # Frontend: custom DOM Widget UI
+├── assets/              # Screenshots
+├── examples/            # Example workflows
+├── .github/             # GitHub Actions workflow
 ├── README.md
 ├── LICENSE
 ├── pyproject.toml
@@ -54,18 +62,17 @@ comfyui-lora-browser/
 └── .gitignore
 ```
 
-## 已知限制
+## Known Limitations
 
-- 添加新 LoRA 后需重启 ComfyUI 刷新树数据
-- 预览图仅支持与 LoRA 文件同名的 PNG/JPG
-- 目前 Strength 仅支持单值（model 和 clip 共用）
+- Need to restart ComfyUI after adding new LoRAs to refresh tree data
+- Preview images only work for PNG/JPG files sharing the same name as the LoRA file
+- Currently uses a single Strength value for both model and clip
 
-## 兼容性
+## Compatibility
 
-- ComfyUI 秋叶整合包 v1.7+
-- ComfyUI 原版（使用 addDOMWidget API 的版本）
-- LiteGraph 标准节点系统
+- ComfyUI (versions with addDOMWidget API)
+- All major ComfyUI distributions (including Qiuye integration package v1.7+)
 
 ## License
 
-MIT License — 详见 [LICENSE](LICENSE) 文件。
+MIT License — see [LICENSE](LICENSE).
