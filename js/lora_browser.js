@@ -1,5 +1,5 @@
 /**
- * LoRA Browser — rgthree 风格 UI
+ * MLiang LoRA Loader — rgthree-style UI
  */
 import { app } from "../../../scripts/app.js";
 
@@ -130,7 +130,7 @@ function renderTree(parent, tree, path, filter, onSel, previews) {
         var ph = previews[f.fullPath];
         if (ph) {
           el.addEventListener("mouseenter", function(evt){
-            showPreview(evt, "/lorabrowser/preview?h=" + ph);
+            showPreview(evt, "/mliang-lora/preview?h=" + ph);
           });
           el.addEventListener("mouseleave", function(){
             hidePreview();
@@ -316,7 +316,7 @@ function renderUI(ct) {
         nameBtn.addEventListener("mouseenter", function(evt){
           clearTimeout(nameBtn._previewTimer);
           nameBtn._previewTimer = setTimeout(function(){
-            showPreview(evt, "/lorabrowser/preview?h=" + ph);
+            showPreview(evt, "/mliang-lora/preview?h=" + ph);
           }, 200);
         });
         nameBtn.addEventListener("mouseleave", function(){
@@ -467,10 +467,10 @@ function showRowMenu(x, y, ct, idx) {
 /* ========== Extension ========== */
 
 app.registerExtension({
-  name: "LoraBrowser",
+  name: "MLiangLoraLoader",
 
   beforeRegisterNodeDef: function(nodeType, nodeData) {
-    if (nodeData.name !== "LoraBrowser") return;
+    if (nodeData.name !== "MLiangLoraLoader") return;
 
     var origCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function() {
@@ -530,4 +530,4 @@ app.registerExtension({
   },
 });
 
-console.log("[LoRA Browser] Loaded");
+console.log("[MLiang LoRA Loader] Loaded");

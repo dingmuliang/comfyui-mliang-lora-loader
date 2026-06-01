@@ -1,9 +1,9 @@
 """
-LoRA Browser - ComfyUI 自定义节点
-文件夹树浏览 + 多槽位 LoRA 加载 + 预览图
+MLiang LoRA Loader - ComfyUI Custom Node
+Folder-tree browsing + multi-slot LoRA loading + preview
 
-安装: 整个文件夹放入 ComfyUI/custom_nodes/
-重启 ComfyUI（不是刷新网页）
+Install: place the entire folder into ComfyUI/custom_nodes/
+Restart ComfyUI (not just refresh the web page)
 """
 import os
 import json
@@ -27,7 +27,7 @@ def _register_routes():
     from server import PromptServer
     srv = PromptServer.instance
 
-    @srv.routes.get("/lorabrowser/preview")
+    @srv.routes.get("/mliang-lora/preview")
     async def get_preview(request):
         h = request.query.get("h", "")
         if not h or h not in _preview_cache:
@@ -111,8 +111,8 @@ _tree_cache = _write_tree_cache()
 _register_routes()
 
 
-class LoraBrowser:
-    """LoRA Browser — 树形浏览 + 多槽位 + 预览"""
+class MLiangLoraLoader:
+    """MLiang LoRA Loader — tree browsing + multi-slot + preview"""
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -152,7 +152,7 @@ class LoraBrowser:
 
             lora_path = folder_paths.get_full_path("loras", lora_name)
             if not lora_path:
-                print(f"[LoRA Browser] LoRA not found: {lora_name}")
+                print(f"[MLiang LoRA Loader] LoRA not found: {lora_name}")
                 continue
 
             lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
@@ -164,11 +164,11 @@ class LoraBrowser:
 
 
 NODE_CLASS_MAPPINGS = {
-    "LoraBrowser": LoraBrowser,
+    "MLiangLoraLoader": MLiangLoraLoader,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LoraBrowser": "LoRA Browser",
+    "MLiangLoraLoader": "MLiang LoRA Loader",
 }
 
 WEB_DIRECTORY = "./js"
