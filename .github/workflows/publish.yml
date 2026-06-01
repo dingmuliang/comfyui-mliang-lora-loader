@@ -1,0 +1,26 @@
+name: Publish to ComfyUI Registry
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate pyproject.toml
+        run: pip install tomli && python -c "import tomli; tomli.load(open('pyproject.toml','rb'))"
+
+      - name: Publish
+        uses: Comfy-Org/publish-action@main
+        with:
+          token: ${{ secrets.REGISTRY_TOKEN }}
