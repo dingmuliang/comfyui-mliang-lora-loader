@@ -1,0 +1,760 @@
+{
+  "id": "e74b687c-74b2-45d5-b03f-d114f5f26d07",
+  "revision": 0,
+  "last_node_id": 125,
+  "last_link_id": 287,
+  "nodes": [
+    {
+      "id": 116,
+      "type": "CLIPTextEncode",
+      "pos": [
+        8355.903181709178,
+        3660.4130997223083
+      ],
+      "size": [
+        425.2799987792969,
+        180.61000061035156
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 287
+        },
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            278
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "lowres,bad anatomy,bad hands,text,error,missing fingers,extra digit,fewer digits,cropped,worst quality,(low quality:0.9),normal quality,jpeg artifacts,signature,watermark,username,blurry,ugly,duplicate,morbid,mutilated,out of frame,extra fingers,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,dehydrated,bad proportions,extra limbs,cloned face,disfigured,gross proportions,malformed limbs,missing arms,missing legs,extra arms,extra legs,fused fingers,too many fingers,long neck,nsfw,"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 119,
+      "type": "EmptyLatentImage",
+      "pos": [
+        7965.074834871977,
+        3860.716112290171
+      ],
+      "size": [
+        340,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "label": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        },
+        {
+          "label": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            279
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 118,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        7581.399264042226,
+        3471.076578941715
+      ],
+      "size": [
+        315,
+        98
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "ckpt_name",
+          "name": "ckpt_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "ckpt_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            283
+          ]
+        },
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            284
+          ]
+        },
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            282
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65",
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "models": [
+          {
+            "name": "sd_xl_base_1.0.safetensors",
+            "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors?download=true",
+            "directory": "checkpoints"
+          }
+        ]
+      },
+      "widgets_values": [
+        "自己模型\\MLiang 设计元素.safetensors"
+      ]
+    },
+    {
+      "id": 121,
+      "type": "VAEDecode",
+      "pos": [
+        8356.773579308121,
+        3910.177449910225
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 281
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 282
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            280
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 120,
+      "type": "KSampler",
+      "pos": [
+        8796.327269373889,
+        3437.7284435183174
+      ],
+      "size": [
+        270,
+        474
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 285
+        },
+        {
+          "label": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 277
+        },
+        {
+          "label": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 278
+        },
+        {
+          "label": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 279
+        },
+        {
+          "label": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "label": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "label": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "label": "sampler_name",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "label": "scheduler",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "label": "denoise",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            281
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.23.0",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        26157764935766,
+        "randomize",
+        35,
+        5,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 122,
+      "type": "SaveImage",
+      "pos": [
+        9083.167717890501,
+        3419.8802248696093
+      ],
+      "size": [
+        635.1900024414062,
+        692.8200073242188
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 280
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 123,
+      "type": "MLiangLoraLoader",
+      "pos": [
+        7948.558450894824,
+        3475.859647143747
+      ],
+      "size": [
+        371.36459749809364,
+        318.92797734901797
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 283
+        },
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 284
+        },
+        {
+          "label": "loras_ui",
+          "name": "loras_ui",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "loras_ui"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            285
+          ]
+        },
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            286,
+            287
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MLiangLoraLoader"
+      },
+      "widgets_values": [
+        "[{\"lora\":\"我训练的模型/Q版国风元素.safetensors\",\"strength_model\":0.2,\"strength_clip\":0.4,\"enabled\":true}]",
+        [
+          {
+            "lora": "我训练的模型/Q版国风元素.safetensors",
+            "strength_model": 0.2,
+            "strength_clip": 0.4,
+            "enabled": true
+          }
+        ]
+      ]
+    },
+    {
+      "id": 115,
+      "type": "CLIPTextEncode",
+      "pos": [
+        8345.212057555284,
+        3438.9156292547805
+      ],
+      "size": [
+        422.8500061035156,
+        164.30999755859375
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 286
+        },
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            277
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.65",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "MLiang,bell, solo, 1boy, beard, chibi, male focus, full body, facial hair, blue eyes, horns, scarf, full beard, red scarf, christmas, blue background, neck bell, smile, antlers, jingle bell, red gloves"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 125,
+      "type": "acd003db-f5ab-4ada-b3a5-0302f101f29f",
+      "pos": [
+        7946.378633272274,
+        3327.2559901350423
+      ],
+      "size": [
+        290.91645217116184,
+        88
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "proxyWidgets": [
+          [
+            "124",
+            "text"
+          ]
+        ],
+        "cnr_id": "comfy-core",
+        "ver": "0.23.0"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      277,
+      115,
+      0,
+      120,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      278,
+      116,
+      0,
+      120,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      279,
+      119,
+      0,
+      120,
+      3,
+      "LATENT"
+    ],
+    [
+      280,
+      121,
+      0,
+      122,
+      0,
+      "IMAGE"
+    ],
+    [
+      281,
+      120,
+      0,
+      121,
+      0,
+      "LATENT"
+    ],
+    [
+      282,
+      118,
+      2,
+      121,
+      1,
+      "VAE"
+    ],
+    [
+      283,
+      118,
+      0,
+      123,
+      0,
+      "MODEL"
+    ],
+    [
+      284,
+      118,
+      1,
+      123,
+      1,
+      "CLIP"
+    ],
+    [
+      285,
+      123,
+      0,
+      120,
+      0,
+      "MODEL"
+    ],
+    [
+      286,
+      123,
+      1,
+      115,
+      0,
+      "CLIP"
+    ],
+    [
+      287,
+      123,
+      1,
+      116,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "acd003db-f5ab-4ada-b3a5-0302f101f29f",
+        "version": 1,
+        "state": {
+          "lastGroupId": 0,
+          "lastNodeId": 125,
+          "lastLinkId": 287,
+          "lastRerouteId": 0
+        },
+        "revision": 0,
+        "config": {},
+        "name": "MLiang Lora节点说明书",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            7738.853043004987,
+            3282.2876137934586,
+            128,
+            48
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            8386.853043004987,
+            3282.2876137934586,
+            128,
+            48
+          ]
+        },
+        "inputs": [],
+        "outputs": [],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 124,
+            "type": "CLIPTextEncode",
+            "pos": [
+              7926.853043004987,
+              3221.2876137934586
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "inputs": [
+              {
+                "label": "clip",
+                "localized_name": "clip",
+                "name": "clip",
+                "type": "CLIP",
+                "link": null
+              },
+              {
+                "label": "text",
+                "localized_name": "文本",
+                "name": "text",
+                "type": "STRING",
+                "widget": {
+                  "name": "text"
+                },
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "label": "CONDITIONING",
+                "localized_name": "条件",
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.23.0",
+              "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+              "M = Model Weight, C = Clip Weight\n\nM = Model 权重，C = Clip 权重"
+            ]
+          }
+        ],
+        "groups": [],
+        "links": [],
+        "extra": {}
+      }
+    ]
+  },
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1671841070451079,
+      "offset": [
+        -7336.650381494427,
+        -3112.8155300968715
+      ]
+    },
+    "frontendVersion": "1.44.19",
+    "node_versions": {
+      "comfy-core": "0.3.44"
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "ue_links": [],
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "workflowRendererVersion": "LG"
+  },
+  "version": 0.4
+}

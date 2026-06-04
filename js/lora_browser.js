@@ -20,7 +20,7 @@ function showPreview(evt, src) {
   img.src = src;
   img.onerror = function(){ tt.style.display = "none"; };
   tt.style.display = "block";
-  tt.style.left = (evt.clientX + 12) + "px";
+  tt.style.left = (evt.clientX + 60) + "px";
   tt.style.top = (evt.clientY - 10) + "px";
 }
 function hidePreview() {
