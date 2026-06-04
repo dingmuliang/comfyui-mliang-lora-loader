@@ -327,30 +327,65 @@ function renderUI(ct) {
     }
     row.appendChild(nameBtn);
 
-    // Strength
-    var si = document.createElement("input");
-    si.type = "text";
-    si.style.cssText = "width:38px;text-align:center;background:#222;border:1px solid #444;border-radius:3px;color:#ccc;font-size:11px;padding:1px 2px;flex-shrink:0";
-    si.value = c.strength;
-    si.onchange = function(){
-      var v = parseFloat(si.value);
-      c.strength = isNaN(v) ? 1.0 : v;
+    // Strength Model
+    var sm = document.createElement("input");
+    sm.type = "text";
+    sm.style.cssText = "width:34px;text-align:center;background:#222;border:1px solid #444;border-radius:3px;color:#ccc;font-size:10px;padding:1px;flex-shrink:0";
+    sm.value = (c.strength_model != null) ? c.strength_model : (c.strength || 1.0);
+    sm.onchange = function(){
+      var v = parseFloat(sm.value);
+      c.strength_model = isNaN(v) ? 1.0 : v;
       saveCfg(ct);
     };
-    row.appendChild(si);
+    row.appendChild(sm);
 
-    // Arrow buttons
-    var up = document.createElement("span");
-    up.style.cssText = "width:14px;height:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#888;flex-shrink:0";
-    up.textContent = "\u25B2";
-    up.onclick = function(){ c.strength = parseFloat((c.strength + 0.05).toFixed(2)); saveCfg(ct); renderUI(ct); };
-    row.appendChild(up);
+    var um = document.createElement("span");
+    um.style.cssText = "width:12px;height:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:8px;color:#888;flex-shrink:0;margin-right:-2px";
+    um.textContent = "\u25B2";
+    um.onclick = function(){
+      c.strength_model = parseFloat(((c.strength_model != null ? c.strength_model : (c.strength || 1.0)) + 0.05).toFixed(2));
+      saveCfg(ct); renderUI(ct);
+    };
+    row.appendChild(um);
 
-    var down = document.createElement("span");
-    down.style.cssText = "width:14px;height:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#888;flex-shrink:0";
-    down.textContent = "\u25BC";
-    down.onclick = function(){ c.strength = parseFloat((c.strength - 0.05).toFixed(2)); saveCfg(ct); renderUI(ct); };
-    row.appendChild(down);
+    var dm = document.createElement("span");
+    dm.style.cssText = "width:12px;height:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:8px;color:#888;flex-shrink:0;margin-right:4px";
+    dm.textContent = "\u25BC";
+    dm.onclick = function(){
+      c.strength_model = parseFloat(((c.strength_model != null ? c.strength_model : (c.strength || 1.0)) - 0.05).toFixed(2));
+      saveCfg(ct); renderUI(ct);
+    };
+    row.appendChild(dm);
+
+    // Strength Clip
+    var sc = document.createElement("input");
+    sc.type = "text";
+    sc.style.cssText = "width:34px;text-align:center;background:#222;border:1px solid #444;border-radius:3px;color:#ccc;font-size:10px;padding:1px;flex-shrink:0";
+    sc.value = (c.strength_clip != null) ? c.strength_clip : (c.strength || 1.0);
+    sc.onchange = function(){
+      var v = parseFloat(sc.value);
+      c.strength_clip = isNaN(v) ? 1.0 : v;
+      saveCfg(ct);
+    };
+    row.appendChild(sc);
+
+    var uc = document.createElement("span");
+    uc.style.cssText = "width:12px;height:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:8px;color:#888;flex-shrink:0;margin-right:-2px";
+    uc.textContent = "\u25B2";
+    uc.onclick = function(){
+      c.strength_clip = parseFloat(((c.strength_clip != null ? c.strength_clip : (c.strength || 1.0)) + 0.05).toFixed(2));
+      saveCfg(ct); renderUI(ct);
+    };
+    row.appendChild(uc);
+
+    var dc = document.createElement("span");
+    dc.style.cssText = "width:12px;height:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:8px;color:#888;flex-shrink:0";
+    dc.textContent = "\u25BC";
+    dc.onclick = function(){
+      c.strength_clip = parseFloat(((c.strength_clip != null ? c.strength_clip : (c.strength || 1.0)) - 0.05).toFixed(2));
+      saveCfg(ct); renderUI(ct);
+    };
+    row.appendChild(dc);
 
     // 右键菜单
     row.addEventListener("contextmenu", function(e){
@@ -383,7 +418,7 @@ function renderUI(ct) {
   var add = document.createElement("button");
   add.style.cssText = "width:100%;margin-top:2px;padding:2px;background:#2a2a2a;border:1px solid #444;border-radius:3px;color:#888;font-size:11px;cursor:pointer";
   add.textContent = "+ Add LoRA";
-  add.onclick = function(){ cfg.push({ lora: "\u65E0", strength: 1.0, enabled: true }); ct._expandedSlot = -1; saveCfg(ct); renderUI(ct); };
+  add.onclick = function(){ cfg.push({ lora: "\u65E0", strength_model: 1.0, strength_clip: 1.0, enabled: true }); ct._expandedSlot = -1; saveCfg(ct); renderUI(ct); };
   ct.appendChild(add);
 }
 
@@ -447,7 +482,7 @@ function showRowMenu(x, y, ct, idx) {
   addSep();
   addItem("\uD83D\uDDD1\uFE0F Remove", function(){
     cfg.splice(idx, 1);
-    if (cfg.length === 0) cfg.push({ lora: "\u65E0", strength: 1.0, enabled: true });
+    if (cfg.length === 0) cfg.push({ lora: "\u65E0", strength_model: 1.0, strength_clip: 1.0, enabled: true });
     ct._expandedSlot = -1;
     saveCfg(ct); renderUI(ct);
   });

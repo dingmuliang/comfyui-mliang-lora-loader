@@ -148,7 +148,9 @@ class MLiangLoraLoader:
             lora_name = item.get("lora", "")
             if not lora_name or lora_name == "无":
                 continue
-            strength = float(item.get("strength", 1.0))
+            # 支持新版 strength_model + strength_clip，兼容旧版 strength
+            strength_m = float(item.get("strength_model", item.get("strength", 1.0)))
+            strength_c = float(item.get("strength_clip", item.get("strength", 1.0)))
 
             lora_path = folder_paths.get_full_path("loras", lora_name)
             if not lora_path:
@@ -157,7 +159,7 @@ class MLiangLoraLoader:
 
             lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
             model, clip = comfy.sd.load_lora_for_models(
-                model, clip, lora, strength, strength
+                model, clip, lora, strength_m, strength_c
             )
 
         return (model, clip)
