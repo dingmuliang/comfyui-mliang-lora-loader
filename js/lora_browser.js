@@ -328,6 +328,10 @@ function renderUI(ct) {
     row.appendChild(nameBtn);
 
     // Strength Model
+    var lm = document.createElement("span");
+    lm.style.cssText = "font-size:9px;color:#666;margin-right:2px;flex-shrink:0";
+    lm.textContent = "M";
+    row.appendChild(lm);
     var sm = document.createElement("input");
     sm.type = "text";
     sm.style.cssText = "width:34px;text-align:center;background:#222;border:1px solid #444;border-radius:3px;color:#ccc;font-size:10px;padding:1px;flex-shrink:0";
@@ -358,6 +362,10 @@ function renderUI(ct) {
     row.appendChild(dm);
 
     // Strength Clip
+    var lc = document.createElement("span");
+    lc.style.cssText = "font-size:9px;color:#666;margin-right:2px;flex-shrink:0";
+    lc.textContent = "C";
+    row.appendChild(lc);
     var sc = document.createElement("input");
     sc.type = "text";
     sc.style.cssText = "width:34px;text-align:center;background:#222;border:1px solid #444;border-radius:3px;color:#ccc;font-size:10px;padding:1px;flex-shrink:0";
